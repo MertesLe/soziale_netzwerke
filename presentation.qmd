@@ -1,0 +1,191 @@
+---
+title: 'Früherkennung stark nachgefragter Medientitel in Bibliotheksdaten'
+subtitle: "Projektpartner: Markus Rothbauer (Münchner Stadtbibliothek)"
+author:
+    name: "Alexander Zielke Esteban, Leonie Mertes, Maurizio Morelli, Philip Pervan, Robin Billinger"
+    affiliation: "Fortgeschrittenes Praxisprojekt / Statistisches Praktikum"
+institute: "Projektbetreuung: Christina Sauer"
+date: "01.04.2026"
+date-format: "MM.DD.YYYY"
+format: 
+  revealjs:
+    css: "customstyle.css"
+    embed-resources: true
+    self-contained: true
+    slide-number: c
+    logo: "Images/LMU_Logo.svg"
+    footer: >
+      <div style="display: flex; justify-content: space-between; width: 80%;
+        margin-left: 10%; margin-right: 10%;">
+      <span style="text-align: left;">Statistisches Praktikum</span>
+      <span style="text-align: center;"
+      >Alexander Zielke Esteban, Leonie Mertes, Maurizio Morelli, Philip Pervan, Robin Billinger </span>
+      <span style="text-align: right;">01.04.2026</span>
+      </div>
+editor: source
+---
+
+## Agenda {.custom-smaller}
+
+1.  Projektziel und Datenstruktur
+
+2.  Zielvariable: Out-of-Stock Rate
+
+3.  Durchlaufene Pipeline zur Out-of-Stock Rate
+
+4.  Ereignislogik zur Intervallkonstruktion
+
+5.  Deskriptive Analyse
+
+6.  Proof-of-Concept Modellierung
+
+7.  Validierung und Limitationen
+
+8.  Fazit und Ausblick
+
+## Projektziel und Datenstruktur {.custom-smaller}
+
+::: incremental
+-   Ziel: Prädiktion nachgefragter Titel über 4 Wochen zur Nachbestellung von Exemplaren bei Engpässen
+
+<div style="height:15px;"></div>
+
+-   Struktur: Transaktionsdaten auf Ereignisebene
+
+
+    | AKKEY | EXEMPLARID | AUSLEIHART | ERFASSUNGSDATUM | GROSSGRUPPE  | ... |
+    |-------|------------|------------|-----------------|--------------|-----|
+    | 001   | 01         | Ausleihe   | 2025-10-02      |Belletristik  | ... |
+    | 001   | 02         | Vormerkung | 2025-10-04      |Belletristik  | ... |
+    | 002   | 01         | Rückgabe   | 2025-10-02      |Sachliteratur | ... |
+    |
+
+-   n = 16 172 321, mit 215 418 AKKEYs
+
+-   Filterung auf Großgruppe "Belletristik": n = 2 409 873 für Modellierung
+:::
+
+## Zielvariable: Out-of-Stock Rate {.custom-smaller}
+
+-   Ereignis "Vormerkung" als ursprünglicher Nachfrageindikator aufgrund der inkonsistenten Datenqualität ungeeignet
+
+-   **Out-of-Stock (OOS) Rate** = Anteil von 28 Tagen (4-Wochen Zeitraum), an denen kein Exemplar eines spezifischen Werks verfügbar ist
+
+-   Interpretation: Maß für Knappheit bzw. indirekte Nachfrage
+
+## Durchlaufene Pipeline zur Out-of-Stock Rate {.custom-smaller}
+
+```{r, echo=FALSE, out.width="100%"}
+# Image link like knitr::include_graphics("Images/availability_1o3.png")
+```
+
+## Ereignislogik zur Intervallkonstruktion {.custom-smaller}
+```{r, echo=FALSE, out.width="100%"}
+# knitr::include_graphics("Images/availability_1o3.png")
+```
+
+##  Zielvariable mit Bestand negativ korreliert {.custom-smaller}
+
+## Random Forest schlägt naive Trendfortführung bezüglich Prognosegüte {.custom-smaller}
+
+<div style="font-size: 0.8em; text-align: center;">
+$\mathrm{RMSE} = \sqrt{\mathrm{MSE}} = \sqrt{\frac{1}{m} \sum_{i=1}^{m} \left(y_i - \hat{y_i}\right)^2}$
+</div>
+
+## Solide Vorhersage der OOS-Rate <br> &nbsp; {.custom-smaller}
+
+::: columns
+::: {.column width="60%"}
+```{r, echo=FALSE, out.width="100%"}
+# knitr::include_graphics("plots/Prediction_2_Categories.png")
+```
+:::
+
+::: {.column width="40%"}
+
+::: 
+:::
+
+## Solide Vorhersage der OOS-Rate <br> &nbsp; {.custom-smaller visibility="uncounted"}
+
+::: columns
+::: {.column width="60%"}
+```{r, echo=FALSE, out.width="100%"}
+# knitr::include_graphics("plots/Prediction_2_Categories.png")
+```
+:::
+
+::: {.column width="40%"}
+Konfusionsmatrix:
+
+::: {style="font-size: 0.8em;"}
+```{r, }
+# conf_df <- readRDS("Modelling_results/confusion_matrix.rds")
+# acc <- (conf_df[2, 2] + conf_df[1, 1]) / sum(conf_df)
+# ppv <- conf_df[2, 2] / sum(conf_df[, 2])
+# knitr::kable(conf_df, 
+#              format = "html", 
+#              table.attr = 'style="width: 80%; border-collapse: collapse;"')
+```
+:::
+
+-   Genauigkeit: `r #round(acc, 2)`  
+-   Positiv-prädiktiver Wert: `r #round(ppv, 2)`
+
+::: 
+:::
+
+## Effizienz-Check: modell-basierte Auswahl schließt kurzfristig mehr Bestandslücken {.custom-smaller}
+
+* **Szenario:** Vergleich der tatsächlichen Nachkäufe von Bestandstiteln (Aufstockung) mit den Top-Empfehlungen des Modells
+* **Budget-Fixierung:** Simulation von 677 Exemplaren für beide Gruppen
+
+<br>
+
+::: {.fragment}
+Mittlere OOS-Rate in beiden Gruppen:
+
+| | Gesamter Bestand | Tatsächliche Nachkäufe | Modellempfehlungen |
+|:---|:---:|:---:|:---:|
+| **Mittlere OOS-Rate** | 15.8 % | 56.2 % | 77.4 % |
+:::
+
+<style>
+.reveal table {
+  margin-left: auto;
+  margin-right: auto;
+  border-collapse: collapse;
+  vertical-align: middle;
+}
+.reveal table td {
+  vertical-align: middle !important;
+  padding: 15px;
+}
+</style>
+
+
+## Limitationen {.custom-smaller}
+
+-   keine Langzeitvorhersage, sondern Prognose für nächste vier Wochen
+-   Beschränkung auf Belletristik
+-   Out-of-Stock-Rate als Proxy für Nachfrage
+-   Rekonstruktion der Verfügbarkeit basiert auf Annahmen
+
+
+➔ Proof of Concept-Modellierung
+
+## Fazit {.custom-smaller}
+
+-   ausführliches Preprocessing für Modellierung nötig
+-   gute Prädiktion für kommende vier Wochen
+
+<div style="height:48px;"></div>
+
+::: {.fragment}
+<p style="font-size:48px; font-weight:bold; margin-top:20px;">
+Ausblick und Diskussion
+</p>
+-   Prädiktion über längeren Zeithorizont 
+-   Exaktere historische Bestandsdaten und Eventlogik
+-   Erweiterung auf weitere Genres
+:::
