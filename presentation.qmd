@@ -1,11 +1,10 @@
 ---
-title: 'Früherkennung stark nachgefragter Medientitel in Bibliotheksdaten'
-subtitle: "Projektpartner: Markus Rothbauer (Münchner Stadtbibliothek)"
+title: 'Models for Network Diffusion and Social Influence'
 author:
-    name: "Alexander Zielke Esteban, Leonie Mertes, Maurizio Morelli, Philip Pervan, Robin Billinger"
-    affiliation: "Fortgeschrittenes Praxisprojekt / Statistisches Praktikum"
-institute: "Projektbetreuung: Christina Sauer"
-date: "01.04.2026"
+    name: "Leonie Mertes"
+    affiliation: "Seminar: Analyse von Netzwerkdaten"
+institute: "Betreuer: Prof. Dr. Göran Kauermann"
+date: "06.16.2026"
 date-format: "MM.DD.YYYY"
 format: 
   revealjs:
@@ -17,33 +16,100 @@ format:
     footer: >
       <div style="display: flex; justify-content: space-between; width: 80%;
         margin-left: 10%; margin-right: 10%;">
-      <span style="text-align: left;">Statistisches Praktikum</span>
+      <span style="text-align: left;">Leonie Mertes</span>
       <span style="text-align: center;"
-      >Alexander Zielke Esteban, Leonie Mertes, Maurizio Morelli, Philip Pervan, Robin Billinger </span>
-      <span style="text-align: right;">01.04.2026</span>
+      >Models for Network Diffusion and Social Influence</span>
+      <span style="text-align: right;">16.06.2026</span>
       </div>
 editor: source
 ---
 
-## Agenda {.custom-smaller}
+## Agenda: Models for Network Diffusion {.custom-smaller}
 
-1.  Projektziel und Datenstruktur
+1.  Flows
 
-2.  Zielvariable: Out-of-Stock Rate
+2.  SIR model
 
-3.  Durchlaufene Pipeline zur Out-of-Stock Rate
+3.  Network topology effects
 
-4.  Ereignislogik zur Intervallkonstruktion
+4.  Simulation Models
 
-5.  Deskriptive Analyse
+5.  Dynamic Networks
 
-6.  Proof-of-Concept Modellierung
+6.  Social and behavioral diffusion
 
-7.  Validierung und Limitationen
+7.  Treshold Models
 
-8.  Fazit und Ausblick
 
-## Projektziel und Datenstruktur {.custom-smaller}
+## Agenda: Models for Social Influence {.custom-smaller}
+
+1.  Network Theory
+
+2.  Causal Inference
+
+3.  Methodological Challenges
+
+4.  Research Strategies
+
+5.  Modeling effects of Network social influence
+
+6.  Instrumental Variable and Structural Equation Approaches
+
+7.  Stochastic Actor-Oriented Models (SAOMs)
+
+8.  Sensitivity Analysis
+
+## Motivation {.custom-smaller}
+
+## Flows {.custom-smaller}
+
+## SIR model {.custom-smaller}
+
+## SIR model over time {.custom-smaller}
+
+## Network topology effects on diffusion {.custom-smaller}
+virulence definition
+-   Connectivity
+-   Efficiency
+-   Volume
+
+## Simulation models: test how network structure affects diffusion {.custom-smaller}
+
+## dynamic networks {.custom-smaller}
+
+## Social and behavioral diffusion {.custom-smaller}
+
+SIR diffusion model assumptions:
+-   Individual Contagion
+-   Stability of the contagion
+-   Irrelevance of the contagion to the infector
+-   Single-Source Adoption
+-   Simple state change
+-   Dyadic independence
+
+## Resource Exchange and Social Capital {.custom-smaller}
+
+## Treshold Models {.custom-smaller}
+
+## Social Influence {.custom-smaller}
+
+## Causal Inference {.custom-smaller}
+
+## Methodological Challenges {.custom-smaller}
+
+## Research Strategies {.custom-smaller}
+
+-   Labratory Experiments
+-   Field Experiments
+-   Natural Experiments
+
+## Modeling effects of Network social influence {.custom-smaller}
+
+## Instrumental Variable and Structural Equation Approaches {.custom-smaller}
+
+## Stochastic Actor-Oriented Models (SAOMs) {.custom-smaller}
+
+## Sensitivity Analysis {.custom-smaller}
 
 ::: incremental
 -   Ziel: Prädiktion nachgefragter Titel über 4 Wochen zur Nachbestellung von Exemplaren bei Engpässen
@@ -65,40 +131,32 @@ editor: source
 -   Filterung auf Großgruppe "Belletristik": n = 2 409 873 für Modellierung
 :::
 
-## Zielvariable: Out-of-Stock Rate {.custom-smaller}
+## fett und Stichpunkte {.custom-smaller}
 
--   Ereignis "Vormerkung" als ursprünglicher Nachfrageindikator aufgrund der inkonsistenten Datenqualität ungeeignet
+-   
 
--   **Out-of-Stock (OOS) Rate** = Anteil von 28 Tagen (4-Wochen Zeitraum), an denen kein Exemplar eines spezifischen Werks verfügbar ist
+-   **fett**
 
--   Interpretation: Maß für Knappheit bzw. indirekte Nachfrage
+-   
 
-## Durchlaufene Pipeline zur Out-of-Stock Rate {.custom-smaller}
+## Beispielbild {.custom-smaller}
 
 ```{r, echo=FALSE, out.width="100%"}
 # Image link like knitr::include_graphics("Images/availability_1o3.png")
 ```
 
-## Ereignislogik zur Intervallkonstruktion {.custom-smaller}
-```{r, echo=FALSE, out.width="100%"}
-# knitr::include_graphics("Images/availability_1o3.png")
-```
 
-##  Zielvariable mit Bestand negativ korreliert {.custom-smaller}
-
-## Random Forest schlägt naive Trendfortführung bezüglich Prognosegüte {.custom-smaller}
+## Mathematische Formeln {.custom-smaller}
 
 <div style="font-size: 0.8em; text-align: center;">
 $\mathrm{RMSE} = \sqrt{\mathrm{MSE}} = \sqrt{\frac{1}{m} \sum_{i=1}^{m} \left(y_i - \hat{y_i}\right)^2}$
 </div>
 
-## Solide Vorhersage der OOS-Rate <br> &nbsp; {.custom-smaller}
+## Spalten erstellen <br> &nbsp; {.custom-smaller}
 
 ::: columns
 ::: {.column width="60%"}
-```{r, echo=FALSE, out.width="100%"}
-# knitr::include_graphics("plots/Prediction_2_Categories.png")
-```
+bild einfügen z.b.
 :::
 
 ::: {.column width="40%"}
@@ -116,26 +174,20 @@ $\mathrm{RMSE} = \sqrt{\mathrm{MSE}} = \sqrt{\frac{1}{m} \sum_{i=1}^{m} \left(y_
 :::
 
 ::: {.column width="40%"}
-Konfusionsmatrix:
+überschrift
 
 ::: {style="font-size: 0.8em;"}
 ```{r, }
-# conf_df <- readRDS("Modelling_results/confusion_matrix.rds")
-# acc <- (conf_df[2, 2] + conf_df[1, 1]) / sum(conf_df)
-# ppv <- conf_df[2, 2] / sum(conf_df[, 2])
-# knitr::kable(conf_df, 
-#              format = "html", 
-#              table.attr = 'style="width: 80%; border-collapse: collapse;"')
+# R code
 ```
 :::
 
--   Genauigkeit: `r #round(acc, 2)`  
--   Positiv-prädiktiver Wert: `r #round(ppv, 2)`
+-   punkt
 
 ::: 
 :::
 
-## Effizienz-Check: modell-basierte Auswahl schließt kurzfristig mehr Bestandslücken {.custom-smaller}
+## beispiellayout, Tabellen {.custom-smaller}
 
 * **Szenario:** Vergleich der tatsächlichen Nachkäufe von Bestandstiteln (Aufstockung) mit den Top-Empfehlungen des Modells
 * **Budget-Fixierung:** Simulation von 677 Exemplaren für beide Gruppen
@@ -164,17 +216,8 @@ Mittlere OOS-Rate in beiden Gruppen:
 </style>
 
 
-## Limitationen {.custom-smaller}
 
--   keine Langzeitvorhersage, sondern Prognose für nächste vier Wochen
--   Beschränkung auf Belletristik
--   Out-of-Stock-Rate als Proxy für Nachfrage
--   Rekonstruktion der Verfügbarkeit basiert auf Annahmen
-
-
-➔ Proof of Concept-Modellierung
-
-## Fazit {.custom-smaller}
+## später einblenden {.custom-smaller}
 
 -   ausführliches Preprocessing für Modellierung nötig
 -   gute Prädiktion für kommende vier Wochen
