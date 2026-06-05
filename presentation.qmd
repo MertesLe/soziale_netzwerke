@@ -69,9 +69,9 @@ editor: source
 
 ## Network topology effects on diffusion {.custom-smaller}
 virulence definition
--   Connectivity
--   Efficiency
--   Volume
+- Connectivity
+- Efficiency
+- Volume
 
 ## Simulation models: test how network structure affects diffusion {.custom-smaller}
 
@@ -80,22 +80,65 @@ virulence definition
 ## Social and behavioral diffusion {.custom-smaller}
 
 SIR diffusion model assumptions:
--   Individual Contagion
--   Stability of the contagion
--   Irrelevance of the contagion to the infector
--   Single-Source Adoption
--   Simple state change
--   Dyadic independence
+- Individual Contagion
+- Stability of the contagion
+- Irrelevance of the contagion to the infector
+- Single-Source Adoption
+- Simple state change
+- Dyadic independence
 
 ## Resource Exchange and Social Capital {.custom-smaller}
 
+## Treshold Models Idea {.custom-smaller}
+- Public Goods
+- Collective Action
+- Complex Contagion
+
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("Images/152threshold_model.png")
+```
+
 ## Treshold Models {.custom-smaller}
 
+- Granovetters Modell: variierendes individuelles Level an akzeptieren Kosten
+- Erweiterung: Lokale Nachbarn erfüllen Treshold
+- Valentes model: individuelle Tresholds
+- Centola and Macys: Art der Verbindung entscheidend
+
 ## Social Influence {.custom-smaller}
+- what diffuses is able to change while diffusion
+- Network autocorrelation Model = individual’s current opinion is the tie-weighted average of their social contacts’ opinions
+
+<div style="font-size: 0.8em; text-align: center;">
+$\mathrm{Y^t} = \alpha W Y^{t-1} + (1-\alpha)Y^1$
+</div>
+
+(Annahmen:?)
+Baseline Modell erweitern:
+1) $Y^1 = X\beta$ --> canonical networks / spatial autocorrelation model
+2) individuelle Gewichtung persönlicher Einflüsse (keine Konstante $\alpha$)
+3) Diagonalen zu W hinzufügen für variierende eigene Gewichte
+
+behavior assumptions:
+1) single constant inﬂuence parameter
+2) interpersonal inﬂuence matrix W is proportional to observed interaction networks
+3) inﬂuence process has reached equilibrium
+
+model speciﬁcation assumptions concerning observed covariates and confounders
 
 ## Causal Inference {.custom-smaller}
 
+selection-or-inﬂuence debate
+
 ## Methodological Challenges {.custom-smaller}
+
+- set timeline to differ causes from effects
+- unobserved heterogeneity and measurement issues
+- spuriousness
+
+1) what hypothesized mechanism?
+2) mechanism before the effect?
+3) how mechanism might conflate with alternative explanations?
 
 ## Research Strategies {.custom-smaller}
 
@@ -106,6 +149,10 @@ SIR diffusion model assumptions:
 ## Modeling effects of Network social influence {.custom-smaller}
 
 ## Instrumental Variable and Structural Equation Approaches {.custom-smaller}
+key characteristics:
+1) Relevance: Z has causal effect on X
+2) Exclusion: Z affects Y only through X
+3) Exchangeability: no confounding in the effect of Z on Y
 
 ## Stochastic Actor-Oriented Models (SAOMs) {.custom-smaller}
 
