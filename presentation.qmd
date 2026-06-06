@@ -139,16 +139,27 @@ knitr::include_graphics("Images/141avgdeg.jpg")
 Quelle: https://networksciencebook.com/chapter/3#evolution-network 
 
 ## Network topology effects on diffusion {.custom-smaller}
-**virulence**:probability that one person will pass an infection to another given contact:  
-$v = P_{ij}$, where $v >0$ when $i$ is infected and $j$ is susceptible  
-- Connectivity  
-- Efficiency  
+-   Efficiency  
 ```{r, echo=FALSE, out.width="100%"}
 knitr::include_graphics("Images/142efficiency.png")
 ```
-- Volume  
+
+## Network topology effects on diffusion {.custom-smaller}
+-   Volume: total amount of direct contact  
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("Images/143stdiffusion.png")
+```
+
 
 ## Simulation models: test how network structure affects diffusion {.custom-smaller}
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("Images/143topsimulation.png")
+```
+
+## Simulation models: test how network structure affects diffusion {.custom-smaller}
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("Images/143topsimulation5.png")
+```
 
 ## dynamic networks {.custom-smaller}
 
