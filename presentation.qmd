@@ -24,6 +24,8 @@ format:
 editor: source
 ---
 
+## Motivation {.custom-smaller}
+
 ## Agenda: Models for Network Diffusion {.custom-smaller}
 
 1.  Flows
@@ -59,19 +61,92 @@ editor: source
 
 8.  Sensitivity Analysis
 
-## Motivation {.custom-smaller}
+## Flows {.custom-smaller}
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("Images/11flows1.png")
+```
+
 
 ## Flows {.custom-smaller}
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("Images/11flows2.png")
+```
+
+## Flows {.custom-smaller}
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("Images/11flows2.png")
+```
+
+## Flows {.custom-smaller}
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("Images/11flows3.png")
+```
+
+## Flows {.custom-smaller}
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("Images/11flows4.png")
+```
+
+## Flows {.custom-smaller}
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("Images/11flows5.png")
+```
 
 ## SIR model {.custom-smaller}
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("Images/13SIR.png")
+```
+<div style="font-size: 0.8em; text-align: left;">
+$\frac{dS}{dt} = - \frac{\beta SI}{N}$  
+
+$\frac{dI}{dt} = \frac{\beta SI}{N} - \gamma I$  
+
+$\frac{dR}{dt} = \gamma I$  
+
+reproductive number $R_0 = \frac{\beta}{\gamma}$
+</div>
 
 ## SIR model over time {.custom-smaller}
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("Images/13timesir.png")
+```
+
+## Varying infection behavior {.custom-smaller}
+<div style="font-size: 0.8em; text-align: left;">
+$c(\beta = vc)$ (Warum in Klammern?)  
+
+$R_0 = v\bar{c}d$
+</div>  
+network diffusion process governed by:  
+(1) topology of the network structure  
+(2) the timing of relations of infection (i.e., duration and sequence)
 
 ## Network topology effects on diffusion {.custom-smaller}
-virulence definition
-- Connectivity
-- Efficiency
-- Volume
+**virulence**:probability that one person will pass an infection to another given contact:  
+$v = P_{ij}$, where $v >0$ when $i$ is infected and $j$ is susceptible  
+- Connectivity  
+    What drives diffusion?  
+    1. Geodesic distance  
+    2. Structural cohesion
+- Efficiency  
+- Volume  
+
+## Network topology effects on diffusion {.custom-smaller}
+average degree: size of components 
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("Images/141avgdeg.jpg")
+```
+Quelle: https://networksciencebook.com/chapter/3#evolution-network 
+
+## Network topology effects on diffusion {.custom-smaller}
+**virulence**:probability that one person will pass an infection to another given contact:  
+$v = P_{ij}$, where $v >0$ when $i$ is infected and $j$ is susceptible  
+- Connectivity  
+- Efficiency  
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("Images/142efficiency.png")
+```
+- Volume  
 
 ## Simulation models: test how network structure affects diffusion {.custom-smaller}
 
