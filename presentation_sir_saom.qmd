@@ -182,21 +182,7 @@ knitr::include_graphics("Images/143topsimulation.png")
 knitr::include_graphics("Images/143topsimulation5.png")
 ```
 
-## timing limits on diffusion {.custom-smaller}
-
-```{r, echo=FALSE, out.width="100%"}
-knitr::include_graphics("Images/144timing.png")
-```
-
-::: {style="font-size: 0.6em; color: gray;"}
-R package EpiModel
-:::
-
-## Social and behavioral diffusion {.custom-smaller}
-
-Infected –\> choose to become "infected"
-
-SIR diffusion model assumptions:
+## SIR diffusion model assumptions {.custom-smaller}
 
 -   Individual Contagion
 
@@ -210,101 +196,13 @@ SIR diffusion model assumptions:
 
 -   Dyadic independence
 
-Resource Exchange and Social Capital
-
-## Treshold Models Idea {.custom-smaller}
-
--   Public Goods
--   Collective Action
--   Complex Contagion
+## Stochastic Actor-Oriented Models (SAOMs) old {.custom-smaller}
 
 ```{r, echo=FALSE, out.width="100%"}
-knitr::include_graphics("Images/152threshold_model.png")
+knitr::include_graphics("Images/1saomIdee.png")
 ```
 
-## Treshold Models {.custom-smaller}
-
--   Granovetter model: participation is interdependent but with varying levels of acceptable cost\
--   extended: local neighborhood threshold\
--   Valentes model: infer adoption thresholds from the data\
--   Centola and Macys: complex contagions
-
-## Social Influence {.custom-smaller}
-
--   what diffuses is able to change while diffusion\
--   Network autocorrelation Model = individual’s current opinion is the tie-weighted average of their social contacts’ opinions
-
-::: {style="font-size: 0.8em; text-align: center;"}
-$\mathrm{Y^t} = \alpha W Y^{t-1} + (1-\alpha)Y^1$
-:::
-
-## Social Influence {.custom-smaller}
-
-(Annahmen:?) Baseline Modell erweitern:
-
-::: {style="font-size:0.8em;"}
-1\) $Y^1 = X\beta$ --\> canonical networks / spatial autocorrelation model
-
-2\) individuelle Gewichtung persönlicher Einflüsse (keine Konstante $\alpha$)
-
-3\) Diagonalen zu W hinzufügen für variierende eigene Gewichte
-:::
-
-behavior assumptions:
-
-::: {style="font-size:0.8em;"}
-1\) single constant inﬂuence parameter
-
-2\) interpersonal inﬂuence matrix W is proportional to observed interaction networks
-
-3\) inﬂuence process has reached equilibrium
-:::
-
-model speciﬁcation assumptions concerning observed covariates and confounders
-
-## Methodological Challenges {.custom-smaller}
-
-Causal Inference: selection-or-inﬂuence debate
-
--   set timeline to differ causes from effects
-
--   unobserved heterogenity and measurement issues
-
--   spuriousness
-
-1)  what hypothesized mechanism?
-2)  mechanism before the effect?
-3)  how mechanism might conflate with alternative explanations?
-
-## Research Strategies {.custom-smaller}
-
-```{r, echo=FALSE, out.width="100%"}
-knitr::include_graphics("Images/23experiments.png")
-```
-
-::: {style="font-size: 0.6em; color: gray;"}
-Source: ChatGPT
-:::
-
-## Instrumental Variable and Structural Equation Approaches {.custom-smaller}
-
-Modeling effects of Network social influence with SAOMs
-
-random assignment Z is instrument for treatment X if
-
-1\) Relevance: Z has causal effect on X
-
-2\) Exclusion: Z affects Y only through X
-
-3\) Exchangeability: no confounding in the effect of Z on Y
-
-## Stochastic Actor-Oriented Models (SAOMs) {.custom-smaller}
-
-```{r, echo=FALSE, out.width="100%"}
-knitr::include_graphics("Images/242saom.png")
-```
-
-## Stochastic Actor-Oriented Models (SAOMs) {.custom-smaller}
+## Stochastic Actor-Oriented Models (SAOMs) old {.custom-smaller}
 
 SAOM: agent-based model in which agents attempt to maximize utility functions on network relations and behaviors
 
@@ -320,14 +218,14 @@ $f_i(\beta, x) = \sum_k \beta_kS_{ki}(x) + \epsilon(x, z, t, j)$
 $f_i^z(\beta, x) = \sum_k \beta_k^z S_{ki}^z(x, z) + \epsilon(x, z, t, v)$
 :::
 
-## Core requirements of SAOMs {.custom-smaller}
+## Core requirements of SAOMs old {.custom-smaller}
 
 1.  data collected at two or more points in time\
 2.  small to moderately sized networks\
 3.  some degree of observed change between time points (Jaccard index of $0.3$ to $0.6$)\
 4.  directed networks
 
-## Assumptions of SAOMs {.custom-smaller}
+## Assumptions of SAOMs old {.custom-smaller}
 
 1.  actors have agency over links and behavior\
 2.  time is continuos\
@@ -336,15 +234,80 @@ $f_i^z(\beta, x) = \sum_k \beta_k^z S_{ki}^z(x, z) + \epsilon(x, z, t, v)$
 5.  actors are omniscient and behave rational\
 6.  only one tie can be changed a time
 
-## Sensitivity Analysis {.custom-smaller}
+## Assumptions of SAOMs {.custom-smaller}
 
-tries to estimate the size of error potential --\> bounds risk of bias
+1.  continuous time
 
-input:\
-coefficient, standard error, nr of observations , nr of covariates, nr of treatment condition cases
+2.  Markov-process
 
-reveals:
+3.  Actor-Oriented
 
--   bias needed to invalidate an inference
+4.  One-Tie-at-a-Time
 
--   impact threshold for a confounding variable
+5.  Ties are states, not events.
+
+6.  Actors act independently
+
+## Model Components {.custom-smaller}
+
+::: {style="font-size: 0.8em; text-align: middle;"}
+$X = (x_{ij})$, $(x_{ij}) = \begin{cases} 0 & \text{no tie exists} \\ 1 & \text{tie exists} \end{cases}$
+
+Actor features $v_i$\
+Dyadic features $w_{ij}$
+:::
+
+-   Rate function: Rate of change of the network by actor $i$ is denoted $λ_i$
+
+-   Objective function $f_i(β,x)$ indicates preferred ‘directions’ of change
+
+## Rate Function {.custom-smaller}
+
+Rate of change of the network by actor $i$ is denoted $λ_i$:\
+expected frequency of changes by actor $i$ between observations.
+
+rate functions can depend on:
+
+-   observation period $(t_{m-1}, t_m)$
+
+-   actor covariates
+
+-   network position (degrees etc.)
+
+through exponential link function.
+
+$\lambda_i(\alpha, x) = \rho_m \exp (\sum_h \alpha_h v_{hi})$
+
+Probability that actor $i$ randomly gets opportunity to change a tie in time interval $(t, t + \epsilon)$ is given by $\epsilon \lambda_i$.
+
+## Objective Function {.custom-smaller}
+
+Conditional on actor i being allowed to make a change, probability for that $X_{ij}$ changes to $1 - X_{ij}$ follows multinomial-logit-model: $p_{ij}(\beta, x) = \frac{\exp(f_i(\beta,\ x(i \rightsquigarrow j)))}{\sum_{h = 1}^n \exp(f_i(\beta,\ x(i \rightsquigarrow h)))}$
+
+$f_i(\beta, x) = \sum_k \beta_k s_{ik}(x)$
+
+$s_{ik}(x)$ are evaluation functions
+
+--\> myopic stochastic optimization
+
+## Myopic Stochastic Optimization {.custom-smaller}
+
+## Evaluation Function {.custom-smaller}
+
+Choose possible network effects for actor $i$:
+
+|  |  |
+|:---------------------|:---------------------------------------------------|
+| Outdegree | $s_{i1}(x) = x_{i+}$ |
+| Reciprocity | $s_{i2}(x) = \sum_j x_{ij}x_{ji}$ |
+| Transitivity (triplets) | $s_{i3}(x) = \sum_{j, h} x_{ij}\ x_{jh}\ x_{ih}$ |
+| Balance | $s_{i4}(x) = \sum_{j = 1}^n x_{ij} \sum_{\substack{h=1\\ h\neq i,j}}^n (1\ -\ |x_{ih}\ -\ x_{jh}|)$ |
+| covariate-related popularity | $s_{i5}(x) = \sum_j x_{ij}\ v_j$ |
+
+transitivity (ties), indirect ties, in-degree related popularity, out-degree related popularity, out-degree related activity, in-degree related activity, three-cycle, covariate-related activity, covariate-related similarity, covariate-related interaction, covariate-related preference (\$w\_{ij}\$), ...
+
+## Endowment Function {.custom-smaller}
+
+## Behavior SAOM and Influence-effects {.custom-smaller}
+
+## Use Case: Peer Effects on smoking {.custom-smaller}
