@@ -470,15 +470,53 @@ knitr::include_graphics("Images/model3zoom.png")
 
 Behavior $Z = (z_1, ..., z_2)$
 
-Second Objective Function: $f_i^Z(\beta, x, z) = \sum_k \beta_k\ s_{ik}(x, z)$
+2.  Objective Function: $f_i^Z(\beta, x, z(i, h \rightsquigarrow v)) = \sum_k \beta_k\ s_{ik}(x, z(i, h \rightsquigarrow v))$
 
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("Images/behavior.png")
+```
+
+## Behavior SAOM and Influence-effects {.custom-smaller visibility="uncounted"}
+
+Behavior $Z = (z_1, ..., z_2)$
+
+2.  Objective Function: $f_i^Z(\beta, x, z(i, h \rightsquigarrow v)) = \sum_k \beta_k\ s_{ik}(x, z(i, h \rightsquigarrow v))$
+
+::::: columns
+::: {.column width="50%"}
 Influence-Effekte:
 
 -   Linear Tendency $z_i$
 
 -   Quadratic Tendency $z_i^2$
 
--   Average Similarity $\frac{1}{x_{i+}}\sum_j x_{ij}\ sim(z_i, z_j)$
+-   Average Similarity $\frac{1}{x_{i+}}\sum_j x_{ij}\ \text{sim}(z_i, z_j)$\
+    similarity between $v_i$ and $v_j$:\
+    $\text{sim}(z_{ih}, z_{jh}) = 1 - \frac{|z_{ih}-z_{jh}|}{R_{Z^h}}$
+
+:::
+
+::: {.column width=50%"}
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("Images/behaviorQuadratic.png")
+```
+:::
+:::::
+
+## Interpretation {.custom-smaller}
+::::: columns
+::: {.column width="50%"}
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("Images/behaviorInterpret1.png")
+```
+:::
+
+::: {.column width=15%"}
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("Images/behaviorInterpret2.png")
+```
+:::
+:::::
 
 ## Estimation {.custom-smaller}
 
@@ -487,7 +525,7 @@ Siena/RSiena
 1.  Condition on $X(t_1)$
 
 2.  Choose to $\theta$ sensitive statistic $Z = (Z_1, ..., Z_K)$:\
-    $Z = (C, S_1, ..., S_{K-1})$ \
+    $Z = (C, S_1, ..., S_{K-1})$\
     with $C = \hat{\lambda}_i(x) = \sum_{\substack{i,j=1\\ i\neq j}}^g |X_{ij}(t_2) - X_{ij}(t_1)|$ and $S_i = \sum_{i=1}^n s_{ik}(X(t_2))$
 
 3.  Determine $\hat{\theta}$ of $\theta = (\rho, \beta)$ for which $E_{\hat{\theta}}\{Z\} = z$\
@@ -506,6 +544,8 @@ modeling options:
 4.  Pairwise disjunctive (forcing) model
 
 5.  Pairwise compensatory (additive) model
+
+## Probleme {.custom-smaller}
 
 ## Sources {.custom-smaller}
 
