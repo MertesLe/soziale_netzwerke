@@ -30,25 +30,25 @@ editor: source
 knitr::include_graphics("Images/11flows1.png")
 ```
 
-## Flows {.custom-smaller}
+## Flows {.custom-smaller visibility="uncounted"}
 
 ```{r, echo=FALSE, out.width="100%"}
 knitr::include_graphics("Images/11flows2.png")
 ```
 
-## Flows {.custom-smaller}
+## Flows {.custom-smaller visibility="uncounted"}
 
 ```{r, echo=FALSE, out.width="100%"}
 knitr::include_graphics("Images/11flows3.png")
 ```
 
-## Flows {.custom-smaller}
+## Flows {.custom-smaller visibility="uncounted"}
 
 ```{r, echo=FALSE, out.width="100%"}
 knitr::include_graphics("Images/11flows4.png")
 ```
 
-## Flows {.custom-smaller}
+## Flows {.custom-smaller visibility="uncounted"}
 
 ```{r, echo=FALSE, out.width="100%"}
 knitr::include_graphics("Images/11flows5.png")
@@ -176,7 +176,7 @@ knitr::include_graphics("Images/143stdiffusion.png")
 knitr::include_graphics("Images/143topsimulation.png")
 ```
 
-## Simulation models: test how network structure affects diffusion {.custom-smaller}
+## Simulation models: test how network structure affects diffusion {.custom-smaller visibility="uncounted"}
 
 ```{r, echo=FALSE, out.width="100%"}
 knitr::include_graphics("Images/143topsimulation5.png")
@@ -195,12 +195,6 @@ knitr::include_graphics("Images/143topsimulation5.png")
 -   Simple state change
 
 -   Dyadic independence
-
-## Stochastic Actor-Oriented Models (SAOMs) old {.custom-smaller}
-
-```{r, echo=FALSE, out.width="100%"}
-knitr::include_graphics("Images/1saomIdee.png")
-```
 
 ## Stochastic Actor-Oriented Models (SAOMs) old {.custom-smaller}
 
@@ -234,19 +228,85 @@ $f_i^z(\beta, x) = \sum_k \beta_k^z S_{ki}^z(x, z) + \epsilon(x, z, t, v)$
 5.  actors are omniscient and behave rational\
 6.  only one tie can be changed a time
 
+## Stochastic Actor-Oriented Models (SAOMs) {.custom-smaller}
+
+::::: columns
+::: {.column width="40%"}
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("Images/1saomIntro1.png")
+```
+:::
+
+::: {.column width="60%"}
+:::
+:::::
+
+## Stochastic Actor-Oriented Models (SAOMs) {.custom-smaller visibility="uncounted"}
+
+::::: columns
+::: {.column width="40%"}
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("Images/1saomIntro2.png")
+```
+:::
+
+::: {.column width="60%"}
+:::
+:::::
+
+## Stochastic Actor-Oriented Models (SAOMs) {.custom-smaller visibility="uncounted"}
+
+::::: columns
+::: {.column width="40%"}
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("Images/1saomIntro3.png")
+```
+:::
+
+::: {.column width="60%"}
+:::
+:::::
+
+## Stochastic Actor-Oriented Models (SAOMs) {.custom-smaller visibility="uncounted"}
+
+::::: columns
+::: {.column width="40%"}
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("Images/1saomIntro3.png")
+```
+:::
+
+::: {.column width="60%"}
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("Images/1saomIdee.png")
+```
+:::
+:::::
+
+##  {.custom-smaller}
+
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("Images/2ministeps.png")
+```
+
 ## Assumptions of SAOMs {.custom-smaller}
 
-1.  continuous time
+1.  X is adjacency matrix of directed graph; \
+    tie indicator $(x_{ij}) = \begin{cases} 0 & \text{no tie exists} \\ 1 & \text{tie exists} \end{cases}$
 
-2.  Markov-process
+2.  independent variables: Actor features $v_i$, Dyadic features $w_{ij}$
 
-3.  Actor-Oriented
+3.  continuous time parameter t, observed moments $t_1, ..., t_M$
 
-4.  One-Tie-at-a-Time
+4.  network change process follows Markov-process
 
-5.  Ties are states, not events.
+5.  Actor control their outgoing ties
 
-6.  Actors act independently
+6.  One-Tie-at-a-Time
+
+7.  Ties are states, not events.
+
+8.  Actors act benefit-oriented
 
 ## Model Components {.custom-smaller}
 
@@ -276,7 +336,7 @@ rate functions can depend on:
 
 through exponential link function.
 
-$\lambda_i(\alpha, x) = \rho_m \exp (\sum_h \alpha_h v_{hi})$
+non-constant rate function $\lambda_i(\alpha, x) = \rho_m \exp (\sum_h \alpha_h v_{hi})$
 
 Probability that actor $i$ randomly gets opportunity to change a tie in time interval $(t, t + \epsilon)$ is given by $\epsilon \lambda_i$.
 
@@ -297,17 +357,49 @@ $s_{ik}(x)$ are evaluation functions
 Choose possible network effects for actor $i$:
 
 |  |  |
-|:---------------------|:---------------------------------------------------|
+|:----------------------|:-----------------------------------------------|
 | Outdegree | $s_{i1}(x) = x_{i+}$ |
 | Reciprocity | $s_{i2}(x) = \sum_j x_{ij}x_{ji}$ |
 | Transitivity (triplets) | $s_{i3}(x) = \sum_{j, h} x_{ij}\ x_{jh}\ x_{ih}$ |
 | Balance | $s_{i4}(x) = \sum_{j = 1}^n x_{ij} \sum_{\substack{h=1\\ h\neq i,j}}^n (1\ -\ |x_{ih}\ -\ x_{jh}|)$ |
 | covariate-related popularity | $s_{i5}(x) = \sum_j x_{ij}\ v_j$ |
 
-transitivity (ties), indirect ties, in-degree related popularity, out-degree related popularity, out-degree related activity, in-degree related activity, three-cycle, covariate-related activity, covariate-related similarity, covariate-related interaction, covariate-related preference (\$w\_{ij}\$), ...
+transitivity (ties), indirect ties, in-degree related popularity, out-degree related popularity, out-degree related activity, in-degree related activity, three-cycle, covariate-related activity, covariate-related similarity, covariate-related interaction, covariate-related preference ($w\_{ij}$), ...
 
 ## Endowment Function {.custom-smaller}
 
+Extended model specification: for differently working effects for creation than termination of ties.
+
+updated relative log-probabilities: $f_i(\beta, x(i \rightsquigarrow j))\ -\ x_{ij}\ g_i(\gamma, x, j)$
+
+endowment function $g_i(\gamma, x, j) = \sum_{h=1}^H \gamma_h\ r_{ijh}(x)$
+
 ## Behavior SAOM and Influence-effects {.custom-smaller}
 
+Behavior $Z = (z_1, ..., z_2)$
+
+Second Objective Function: $f_i^Z(\beta, x, z) = \sum_k \beta_k\ s_{ik}(x, z)$
+
+Influence-Effekte:
+
+-   Linear Tendency $z_i$
+
+-   Quadratic Tendency $z_i^2$
+
+-   Average Similarity $\frac{1}{x_{i+}}\sum_j x_{ij}\ sim(z_i, z_j)$\$
+
 ## Use Case: Peer Effects on smoking {.custom-smaller}
+
+## Non-directed networks {.custom-smaller}
+
+modeling options:
+
+1.  Forcing model
+
+2.  Unilateral initiative with reciprocal confirmation
+
+3.  Pairwise conjunctive model
+
+4.  Pairwise disjunctive (forcing) model
+
+5.  Pairwise compensatory (additive) model
