@@ -452,6 +452,20 @@ updated relative log-probabilities: $f_i(\beta, x(i \rightsquigarrow j))\ -\ x_{
 
 endowment function $g_i(\gamma, x, j) = \sum_{h=1}^H \gamma_h\ r_{ijh}(x)$
 
+::::: columns
+::: {.column width="37%"}
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("Images/model3.png")
+```
+:::
+
+::: {.column width="60%"}
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("Images/model3zoom.png")
+```
+:::
+:::::
+
 ## Behavior SAOM and Influence-effects {.custom-smaller}
 
 Behavior $Z = (z_1, ..., z_2)$
@@ -466,7 +480,18 @@ Influence-Effekte:
 
 -   Average Similarity $\frac{1}{x_{i+}}\sum_j x_{ij}\ sim(z_i, z_j)$
 
-## Use Case: Peer Effects on smoking {.custom-smaller}
+## Estimation {.custom-smaller}
+
+Siena/RSiena
+
+1.  Condition on $X(t_1)$
+
+2.  Choose to $\theta$ sensitive statistic $Z = (Z_1, ..., Z_K)$:\
+    $Z = (C, S_1, ..., S_{K-1})$ \
+    with $C = \hat{\lambda}_i(x) = \sum_{\substack{i,j=1\\ i\neq j}}^g |X_{ij}(t_2) - X_{ij}(t_1)|$ and $S_i = \sum_{i=1}^n s_{ik}(X(t_2))$
+
+3.  Determine $\hat{\theta}$ of $\theta = (\rho, \beta)$ for which $E_{\hat{\theta}}\{Z\} = z$\
+    Find $\hat{\theta}$ by Robbinson-Monro process based on repeated simulations and adjusting parameter values\
 
 ## Non-directed networks {.custom-smaller}
 
@@ -484,6 +509,10 @@ modeling options:
 
 ## Sources {.custom-smaller}
 
+Rawlings, C. M., Smith, J. A., Moody, J., & McFarland, D. A. (2023). *Network analysis: integrating social network theory, method, and application with R*. Cambridge University Press - Kapitel 14 und 15
+
+chrome-[extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.stats.ox.ac.uk/\~snijders/siena/IntroSAOM_h.pdf](extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.stats.ox.ac.uk/~snijders/siena/IntroSAOM_h.pdf)
+
 ## Appendix: Computer simulation algorithm for arbitrary rate function $\lambda_i$ {.custom-smaller}
 
 1.  Set $t = 0$ and $x = X(0)$
@@ -497,3 +526,38 @@ modeling options:
 5.  Set $t = t + S$ and $x = x(i\rightsquigarrow j)$
 
 6.  Go to step 2 (unless stopping criterion satisfied)
+
+## Appendix: Robbins-Monro process {.custom-smaller}
+
+method of moments implemented with Monte Carlo simulation
+
+Iteration Step: $\hat{\theta}_{N+1} =\hat{\theta}_N - a_ND^{-1}(z_N - z)$ -\> Iterate until convergence\
+with $z_N$ is simulation of Z with parameter $\hat{\theta}_N$\
+$D_{\theta}$ is estimated from MC simulation: $D_{\theta} = \frac{\partial}{\partial \theta}E\{Z|X(t_1) = x(t_1)\}$
+
+extra simulations:
+
+1.  to check $E_{\hat{\theta}}\{Z\} \approx z$
+
+2.  to estimate $\sum_{\theta} = \text{cov}\{Z|X(t_1) = x(t_1)\}$
+
+3.  to estimate $D_{\theta}$ using a score function algorithm
+
+Compute $\text{cov}(\hat{\theta}) \approx D_{\theta}^{-1}\sum_{\theta}(D_{\theta}^{-1})'$ for standard error computation
+
+## Appendix: Interpretation of non-constant rate and endowment effects {.custom-smaller}
+
+::::: columns
+::: {.column width="40%"}
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("Images/model3.png")
+```
+:::
+
+::: {.column width="60%" style="font-size: 0.6em;"}
+Rate Function $\lambda_i = \rho_m \exp(\alpha \cdot \text{Outdegree}_i)$, $\alpha = 0.041$\
+additional friendship lifts probability for activity by factor $\exp(0.041) = 1.042$, means $+4.2\%$.
+
+If reciprocated tie is deleted: Utility-function is lowered by $-\beta_{\text{reciprocity}} - \gamma_{\text{endowment recipr. tie}} = -1.51 - 1.82 = -3.33$
+:::
+:::::
