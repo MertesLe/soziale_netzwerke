@@ -493,10 +493,9 @@ Influence-Effekte:
 -   Average Similarity $\frac{1}{x_{i+}}\sum_j x_{ij}\ \text{sim}(z_i, z_j)$\
     similarity between $v_i$ and $v_j$:\
     $\text{sim}(z_{ih}, z_{jh}) = 1 - \frac{|z_{ih}-z_{jh}|}{R_{Z^h}}$
-
 :::
 
-::: {.column width=50%"}
+::: {.column width="50%\""}
 ```{r, echo=FALSE, out.width="100%"}
 knitr::include_graphics("Images/behaviorQuadratic.png")
 ```
@@ -504,6 +503,7 @@ knitr::include_graphics("Images/behaviorQuadratic.png")
 :::::
 
 ## Interpretation {.custom-smaller}
+
 ::::: columns
 ::: {.column width="50%"}
 ```{r, echo=FALSE, out.width="100%"}
@@ -511,12 +511,18 @@ knitr::include_graphics("Images/behaviorInterpret1.png")
 ```
 :::
 
-::: {.column width=15%"}
+::: {.column width="15%\""}
 ```{r, echo=FALSE, out.width="100%"}
 knitr::include_graphics("Images/behaviorInterpret2.png")
 ```
 :::
 :::::
+
+Drinking ego $\times$ drinking alter: $0.17$
+
+Smoking dynamics Ave. alter: $1.89$
+
+Alcohol consumption dynamics Ave.alter: $1.59$
 
 ## Estimation {.custom-smaller}
 
